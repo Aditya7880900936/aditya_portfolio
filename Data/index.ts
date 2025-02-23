@@ -1,3 +1,5 @@
+import { SiCodechef } from "react-icons/si";
+
 export const navItems = [
     { name: "About", link: "#about" },
     { name: "Projects", link: "#projects" },
@@ -205,13 +207,26 @@ export const navItems = [
     {
       id: 1,
       img: "/git.svg",
+      href: "https://github.com/Aditya7880900936",
     },
     {
       id: 2,
-      img: "/twit.svg",
+      img: "/codechef1.svg",
+      href:"https://www.codechef.com/users/aditya_sriv_78",
     },
     {
       id: 3,
       img: "/link.svg",
+      href: "https://www.linkedin.com/in/aditya-sanskar-srivastav-a13b08327/",
+    },
+    {
+      id: 4,
+      img: "/codeforces.svg",
+      href: "https://codeforces.com/profile/Aditya_Sanskar_12",
+    },
+    {
+      id: 5,
+      img: "/leetcode.svg",
+      href: "https://leetcode.com/u/Aditya_Sanskar_78/",
     },
   ];
