@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,6 +11,8 @@
   "dependencies": {
     "@react-three/drei": "^10.0.0",
     "@react-three/fiber": "^9.0.4",
+    "@sentry/nextjs": "^9.1.0",
+    "@sentry/replay": "^7.116.0",
     "clsx": "^2.1.1",
     "lottie-react": "^2.4.1",
     "mini-svg-data-uri": "^1.4.4",
