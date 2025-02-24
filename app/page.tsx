@@ -1,16 +1,13 @@
-import dynamic from 'next/dynamic';
+"use client";
+
 import Hero from "@/Components/Hero";
 import Footer from "@/Components/Footer";
 import { navItems } from "@/Data";
-
-// Dynamic imports for components that need client-side rendering
-const FloatingNav = dynamic(() => import("@/Components/UI/FloatingNavbar").then(mod => mod.FloatingNav), {
-  ssr: false
-});
-const Grid = dynamic(() => import("@/Components/Grid"), { ssr: false });
-const RecentsProjects = dynamic(() => import("@/Components/RecentsProjects"), { ssr: false });
-const Experience = dynamic(() => import("@/Components/Experience"), { ssr: false });
-const Approaches = dynamic(() => import("@/Components/Approaches"), { ssr: false });
+import Grid from "@/Components/Grid";
+import RecentsProjects from "@/Components/RecentsProjects";
+import Approaches from "@/Components/Approaches";
+import { FloatingNav } from '@/Components/UI/FloatingNavbar';
+import Experience from "@/Components/Experience";
 
 export default function Home() {
   return (
