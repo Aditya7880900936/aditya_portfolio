@@ -23,10 +23,10 @@ const RecentsProjects = () => {
                 </div>
                 <img src={img} alt={title} className="z-10 absolute bottom-0" />
               </div>
-              <h1 className="lg:text-2xl md:text-xl  font-bold text-base line-clamp-1">
+              <h1 className="lg:text-2xl md:text-xl  font-bold text-base ">
                 {title}
               </h1>
-              <p className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2">
+              <p className="lg:text-xl lg:font-normal font-light text-sm mt-3">
                 {des}
               </p>
               <div className="flex items-center justify-between mt-7 mb-3">
