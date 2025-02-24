@@ -1,4 +1,4 @@
-"use cl"
+"use client";
 
 
 import MagicButton from "./UI/MagicButton";

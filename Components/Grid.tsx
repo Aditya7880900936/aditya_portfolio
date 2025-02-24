@@ -1,4 +1,4 @@
-"use cl"
+"use client";
 
 import { BentoGrid, BentoGridItem } from "./UI/BentoGrid";
 import { gridItems } from "@/Data";

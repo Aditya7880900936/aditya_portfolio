@@ -1,4 +1,4 @@
-"use c"
+"use client";
 
 import { projects } from "@/Data";
 import { PinContainer } from "./UI/3DPin";

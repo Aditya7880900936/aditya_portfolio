@@ -1,4 +1,4 @@
-"use cl"
+"use client";
 
 
 import { FaLocationArrow } from "react-icons/fa";
