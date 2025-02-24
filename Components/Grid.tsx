@@ -1,4 +1,5 @@
-import React from "react";
+"use cl"
+
 import { BentoGrid, BentoGridItem } from "./UI/BentoGrid";
 import { gridItems } from "@/Data";
 

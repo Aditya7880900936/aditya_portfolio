@@ -1,3 +1,6 @@
+"use cl"
+
+
 import { FaLocationArrow } from "react-icons/fa";
 import MagicButton from "./UI/MagicButton";
 import { Spotlight } from "./UI/Spotlight";

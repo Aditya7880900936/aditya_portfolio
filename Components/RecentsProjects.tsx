@@ -1,5 +1,6 @@
+"use c"
+
 import { projects } from "@/Data";
-import React from "react";
 import { PinContainer } from "./UI/3DPin";
 import { FaLocationArrow } from "react-icons/fa";
 

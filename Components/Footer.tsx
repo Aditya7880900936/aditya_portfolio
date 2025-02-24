@@ -1,4 +1,6 @@
-import React from "react";
+"use cl"
+
+
 import MagicButton from "./UI/MagicButton";
 import { FaLocationArrow } from "react-icons/fa";
 import { socialMedia } from "@/Data";

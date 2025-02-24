@@ -1,3 +1,6 @@
+
+"use client";
+
 import { workExperience } from "@/Data";
 import React from "react";
 import { Button } from "./UI/MovingBorder";
