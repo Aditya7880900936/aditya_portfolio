@@ -34,13 +34,15 @@ export const BackgroundGradientAnimation = ({
   containerClassName?: string;
 }) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
-  if(typeof window === "undefined") return null;
 
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
   const [tgX, setTgX] = useState(0);
   const [tgY, setTgY] = useState(0);
   useEffect(() => {
+
+  if(typeof window === "undefined") return ;
+
     document.body.style.setProperty(
       "--gradient-background-start",
       gradientBackgroundStart
