@@ -52,6 +52,9 @@ export const BentoGridItem = ({
   const handleCopy=()=>{
     navigator.clipboard.writeText("adityasanskarsrivastav788@gmail.com");
     setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
   }
 
   return (
@@ -85,7 +88,7 @@ export const BentoGridItem = ({
             <img
               src={spareImg}
               alt={spareImg}
-              className={"object-cover object-center , w-full , h-full"}
+              className={"object-cover object-center w-full h-full"}
             />
           )}
         </div>

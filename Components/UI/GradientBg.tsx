@@ -34,6 +34,7 @@ export const BackgroundGradientAnimation = ({
   containerClassName?: string;
 }) => {
   const interactiveRef = useRef<HTMLDivElement>(null);
+  if(typeof window === "undefined") return; 
 
   const [curX, setCurX] = useState(0);
   const [curY, setCurY] = useState(0);
