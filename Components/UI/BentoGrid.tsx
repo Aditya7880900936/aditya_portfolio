@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import { BackgroundGradientAnimation } from "./GradientBg";
-import { GlobeDemo } from "./GridGlobe";
 import { useState } from "react";
 import animationData from "@/Data/confetti.json";
 import Image from "next/image";
@@ -116,12 +115,6 @@ export const BentoGridItem = ({
           <div className="font-sans font-bold text-lg lg:text-3xl max-w-96 z-10">
             {title}
           </div>
-
-          {id === 2 && (
-            <div className="absolute inset-0 flex items-center justify-center opacity-80">
-              <GlobeDemo />
-            </div>
-          )}
 
           {id === 3 && (
             <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
