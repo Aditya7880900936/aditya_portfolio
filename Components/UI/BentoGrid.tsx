@@ -5,9 +5,11 @@ import { BackgroundGradientAnimation } from "./GradientBg";
 import { useState } from "react";
 import animationData from "@/Data/confetti.json";
 import Image from "next/image";
-import Lottie from "react-lottie";
+import dynamic from "next/dynamic";
 import MagicButton from "./MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
+
+const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 export const BentoGrid = ({
   className,
@@ -19,7 +21,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto ",
+        "grid md:auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto",
         className
       )}
     >
@@ -50,11 +52,11 @@ export const BentoGridItem = ({
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText("adityasanskarsrivastav788@gmail.com");
-    setCopied(true);
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    if (typeof window !== "undefined" && navigator?.clipboard) {
+      navigator.clipboard.writeText("adityasanskarsrivastav788@gmail.com");
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
@@ -64,12 +66,11 @@ export const BentoGridItem = ({
         className
       )}
       style={{
-        background: "rgb(4,7,29)",
-        backgroundColor:
+        background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
-      <div className={`${id == 6 && "flex justify-center"} h-full`}>
+      <div className={cn(id === 6 && "flex justify-center", "h-full")}>
         <div className="w-full h-full absolute">
           {img && (
             <Image
@@ -81,10 +82,12 @@ export const BentoGridItem = ({
             />
           )}
         </div>
+
         <div
-          className={`absolute right-0 -bottom-5 ${
+          className={cn(
+            "absolute right-0 -bottom-5",
             id === 5 && "w-full opacity-80"
-          }`}
+          )}
         >
           {spareImg && (
             <Image
@@ -92,10 +95,11 @@ export const BentoGridItem = ({
               alt={spareImg}
               width={100}
               height={100}
-              className={"object-cover object-center w-full h-full"}
+              className="object-cover object-center w-full h-full"
             />
           )}
         </div>
+
         {id === 6 && (
           <div className="relative w-full h-full">
             <BackgroundGradientAnimation>
@@ -103,6 +107,7 @@ export const BentoGridItem = ({
             </BackgroundGradientAnimation>
           </div>
         )}
+
         <div
           className={cn(
             titleClassName,
@@ -142,17 +147,16 @@ export const BentoGridItem = ({
               </div>
             </div>
           )}
-          {id == 6 && (
+
+          {id === 6 && (
             <div className="mt-5 relative">
-              <div className={`absolute -bottom-5 right-0`}>
+              <div className="absolute -bottom-5 right-0">
                 <Lottie
                   options={{
                     loop: copied,
                     autoplay: copied,
                     animationData,
-                    rendererSettings: {
-                      preserveAspectRatio: "xMidYMid slice",
-                    },
+                    rendererSettings: { preserveAspectRatio: "xMidYMid slice" },
                   }}
                 />
               </div>
