@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -20,6 +20,15 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   const { scrollYProgress } = useScroll();
 
   const [visible, setVisible] = useState(false);
@@ -76,4 +85,3 @@ export const FloatingNav = ({
     </AnimatePresence>
   );
 };
-
