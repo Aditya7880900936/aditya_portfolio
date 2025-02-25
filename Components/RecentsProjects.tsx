@@ -2,6 +2,7 @@
 
 import { projects } from "@/Data";
 import { PinContainer } from "./UI/3DPin";
+import Image from "next/image";
 import { FaLocationArrow } from "react-icons/fa";
 
 const RecentsProjects = () => {
@@ -20,9 +21,15 @@ const RecentsProjects = () => {
             <PinContainer title={title} href={link}>
               <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10 gap-4">
                 <div className="relative w-full h-full overflow-hidden lg:rounded-3xl bg-[#13162d]">
-                  <img src="/bg.png" alt="bg-png" />
+                  <Image src="/bg.png" alt="bg-png" width={500} height={500} />
                 </div>
-                <img src={img} alt={title} className="z-10 absolute bottom-0" />
+                <Image
+                  src={img}
+                  alt={title}
+                  width={500}
+                  height={500}
+                  className="z-10 absolute bottom-0 w-full h-full"
+                />
               </div>
               <h1 className="lg:text-2xl md:text-xl  font-bold text-base ">
                 {title}
@@ -38,13 +45,21 @@ const RecentsProjects = () => {
                       className="border border-white/[0.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex items-center justify-center "
                       style={{ transform: `translateX(-${5 * index * 2}px)` }}
                     >
-                      <img src={icon} alt={icon} className="p-2" />
+                      <Image
+                        src={icon}
+                        alt={icon}
+                        width={100}
+                        height={100}
+                        className="p-2"
+                      />
                     </div>
                   ))}
                 </div>
                 <div className="flex items-center justify-center gap-2">
-                    <p className="flex lg:text-xl md:text-xs text-sm text-purple">Check Live Site</p>
-                    <FaLocationArrow className="ms-3" color="#CBACF9"/>
+                  <p className="flex lg:text-xl md:text-xs text-sm text-purple">
+                    Check Live Site
+                  </p>
+                  <FaLocationArrow className="ms-3" color="#CBACF9" />
                 </div>
               </div>
             </PinContainer>

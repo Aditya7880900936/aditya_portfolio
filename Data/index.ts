@@ -1,4 +1,3 @@
-import { SiCodechef } from "react-icons/si";
 
 export const navItems = [
     { name: "About", link: "#about" },

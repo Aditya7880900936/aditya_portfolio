@@ -5,6 +5,7 @@ import { BackgroundGradientAnimation } from "./GradientBg";
 import { GlobeDemo } from "./GridGlobe";
 import { useState } from "react";
 import animationData from "@/Data/confetti.json";
+import Image from "next/image";
 import Lottie from "react-lottie";
 import MagicButton from "./MagicButton";
 import { IoCopyOutline } from "react-icons/io5";
@@ -49,13 +50,13 @@ export const BentoGridItem = ({
 }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy=()=>{
+  const handleCopy = () => {
     navigator.clipboard.writeText("adityasanskarsrivastav788@gmail.com");
     setCopied(true);
     setTimeout(() => {
       setCopied(false);
     }, 2000);
-  }
+  };
 
   return (
     <div
@@ -69,12 +70,14 @@ export const BentoGridItem = ({
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
-      <div className={`${id==6 && 'flex justify-center'} h-full`}>
+      <div className={`${id == 6 && "flex justify-center"} h-full`}>
         <div className="w-full h-full absolute">
           {img && (
-            <img
+            <Image
               src={img}
               alt={img}
+              width={100}
+              height={100}
               className={cn(imgClassName, "object-cover object-center")}
             />
           )}
@@ -85,17 +88,21 @@ export const BentoGridItem = ({
           }`}
         >
           {spareImg && (
-            <img
+            <Image
               src={spareImg}
               alt={spareImg}
+              width={100}
+              height={100}
               className={"object-cover object-center w-full h-full"}
             />
           )}
         </div>
         {id === 6 && (
-          <BackgroundGradientAnimation>
-            {/* <div className="absolute z-50 flex items-center justify-center text-white font-bold " /> */}
-          </BackgroundGradientAnimation>
+          <div className="relative w-full h-full">
+            <BackgroundGradientAnimation>
+              <div className="absolute inset-0 z-10" />
+            </BackgroundGradientAnimation>
+          </div>
         )}
         <div
           className={cn(
@@ -119,16 +126,14 @@ export const BentoGridItem = ({
           {id === 3 && (
             <div className="flex gap-1 lg:gap-5 w-fit absolute -right-3 lg:-right-2">
               <div className="flex flex-col gap-3 lg:gap-8">
-                {["Next.js", "TailwindCSS", "TypeScript"].map(
-                  (item) => (
-                    <span
-                      key={item}
-                      className="py-2 lg:py-4 px-3 lg:px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E]"
-                    >
-                      {item}
-                    </span>
-                  )
-                )}
+                {["Next.js", "TailwindCSS", "TypeScript"].map((item) => (
+                  <span
+                    key={item}
+                    className="py-2 lg:py-4 px-3 lg:px-3 text-xs lg:text-base opacity-50 lg:opacity-100 rounded-lg text-center bg-[#10132E]"
+                  >
+                    {item}
+                  </span>
+                ))}
                 <span className="py-4 px-3 rounded-lg text-center bg-[#10132E]" />
               </div>
               <div className="flex flex-col gap-3 lg:gap-8">

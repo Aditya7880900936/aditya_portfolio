@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState , useCallback } from "react";
 
 export const BackgroundGradientAnimation = ({
   gradientBackgroundStart = "rgb(108, 0, 162)",
@@ -45,8 +45,14 @@ export const BackgroundGradientAnimation = ({
     if (typeof window === "undefined") return;
 
     const setStyles = () => {
-      document.body.style.setProperty("--gradient-background-start", gradientBackgroundStart);
-      document.body.style.setProperty("--gradient-background-end", gradientBackgroundEnd);
+      document.body.style.setProperty(
+        "--gradient-background-start",
+        gradientBackgroundStart
+      );
+      document.body.style.setProperty(
+        "--gradient-background-end",
+        gradientBackgroundEnd
+      );
       document.body.style.setProperty("--first-color", firstColor);
       document.body.style.setProperty("--second-color", secondColor);
       document.body.style.setProperty("--third-color", thirdColor);
@@ -57,31 +63,42 @@ export const BackgroundGradientAnimation = ({
       document.body.style.setProperty("--blending-value", blendingValue);
     };
 
-    setTimeout(setStyles, 0); // Delay execution to prevent issues with SSR
-  }, []);
+    setTimeout(setStyles, 0); // Prevent SSR hydration issues
+  }, [blendingValue, firstColor, fifthColor, fourthColor, gradientBackgroundEnd, gradientBackgroundStart, pointerColor, secondColor, size, thirdColor]); // ✅ Now runs only once
 
   useEffect(() => {
+    let animationFrameId: number;
+
     function move() {
-      if (!interactiveRef.current) return;
       setCurX((prevX) => prevX + (tgX - prevX) / 20);
       setCurY((prevY) => prevY + (tgY - prevY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-    }
-    move();
-  }, [tgX, tgY]);
 
-  const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
+      if (interactiveRef.current) {
+        interactiveRef.current.style.transform = `translate(${Math.round(
+          curX
+        )}px, ${Math.round(curY)}px)`;
+      }
+
+      animationFrameId = requestAnimationFrame(move);
+    }
+
+    animationFrameId = requestAnimationFrame(move);
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [tgX, tgY , curX, curY]); // 🔥 Remove `curX` & `curY` to stop re-triggering
+
+  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
       const rect = interactiveRef.current.getBoundingClientRect();
       setTgX(event.clientX - rect.left);
       setTgY(event.clientY - rect.top);
     }
-  };
+  }, []);
+  
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
-    }
+    if (typeof window === "undefined") return;
+    setIsSafari(/^((?!chrome|android).)*safari/i.test(navigator.userAgent));
   }, []);
 
   return (
@@ -94,7 +111,11 @@ export const BackgroundGradientAnimation = ({
       <svg className="hidden">
         <defs>
           <filter id="blurMe">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+            <feGaussianBlur
+              in="SourceGraphic"
+              stdDeviation="10"
+              result="blur"
+            />
             <feColorMatrix
               in="blur"
               mode="matrix"
@@ -112,17 +133,19 @@ export const BackgroundGradientAnimation = ({
           isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
         )}
       >
-        {[firstColor, secondColor, thirdColor, fourthColor, fifthColor].map((color, index) => (
-          <div
-            key={index}
-            className={cn(
-              `absolute [background:radial-gradient(circle_at_center,_rgba(var(--${color}),_0.8)_0,_rgba(var(--${color}),_0)_50%)_no-repeat]`,
-              `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
-              `animate-${index + 1}`,
-              `opacity-100`
-            )}
-          />
-        ))}
+        {[firstColor, secondColor, thirdColor, fourthColor, fifthColor].map(
+          (color, index) => (
+            <div
+              key={index}
+              className={cn(
+                `absolute [background:radial-gradient(circle_at_center,_rgba(var(--${color}),_0.8)_0,_rgba(var(--${color}),_0)_50%)_no-repeat]`,
+                `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)] top-[calc(50%-var(--size)/2)] left-[calc(50%-var(--size)/2)]`,
+                `animate-${index + 1}`,
+                `opacity-100`
+              )}
+            />
+          )
+        )}
 
         {interactive && (
           <div
