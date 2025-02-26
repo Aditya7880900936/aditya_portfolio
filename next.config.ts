@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
   },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
 };
 
 export default withSentryConfig(nextConfig, {

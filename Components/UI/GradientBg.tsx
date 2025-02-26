@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState , useCallback } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 export const BackgroundGradientAnimation = ({
   gradientBackgroundStart = "rgb(108, 0, 162)",
@@ -64,7 +64,18 @@ export const BackgroundGradientAnimation = ({
     };
 
     setTimeout(setStyles, 0); // Prevent SSR hydration issues
-  }, [blendingValue, firstColor, fifthColor, fourthColor, gradientBackgroundEnd, gradientBackgroundStart, pointerColor, secondColor, size, thirdColor]); // ✅ Now runs only once
+  }, [
+    blendingValue,
+    firstColor,
+    fifthColor,
+    fourthColor,
+    gradientBackgroundEnd,
+    gradientBackgroundStart,
+    pointerColor,
+    secondColor,
+    size,
+    thirdColor,
+  ]);
 
   useEffect(() => {
     let animationFrameId: number;
@@ -85,16 +96,18 @@ export const BackgroundGradientAnimation = ({
     animationFrameId = requestAnimationFrame(move);
 
     return () => cancelAnimationFrame(animationFrameId);
-  }, [tgX, tgY , curX, curY]); // 🔥 Remove `curX` & `curY` to stop re-triggering
+  }, [tgX, tgY]);
 
-  const handleMouseMove = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    if (interactiveRef.current) {
-      const rect = interactiveRef.current.getBoundingClientRect();
-      setTgX(event.clientX - rect.left);
-      setTgY(event.clientY - rect.top);
-    }
-  }, []);
-  
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      if (interactiveRef.current) {
+        const rect = interactiveRef.current.getBoundingClientRect();
+        setTgX(event.clientX - rect.left);
+        setTgY(event.clientY - rect.top);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     if (typeof window === "undefined") return;
