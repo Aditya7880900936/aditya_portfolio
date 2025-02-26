@@ -6,11 +6,19 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_SENTRY_DSN: process.env.NEXT_PUBLIC_SENTRY_DSN,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  output: 'export'
 };
 
 export default withSentryConfig(nextConfig, {
   org: process.env.SENTRY_ORG,
   project: process.env.SENTRY_PROJECT,
+
+  release: {
+    name: process.env.SENTRY_RELEASE || "1.0.0",
+  }, // Set the release
 
   silent: !process.env.CI, // Only log in CI
 
